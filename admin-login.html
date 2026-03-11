@@ -32,6 +32,11 @@ backdrop-filter:blur(25px);
 text-align:center;
 }
 
+::placeholder{
+color:black;
+font-weight:bold;
+}
+
 .input-group{position:relative}
 
 input{
@@ -86,9 +91,7 @@ cursor:pointer;
 <span class="eye" onclick="togglePass()">👁</span>
 </div>
 
-<input placeholder="Téléphone">
-
-<button>Connexion</button>
+<button onclick="login()">Connexion</button>
 
 </div>
 
@@ -97,6 +100,10 @@ cursor:pointer;
 function togglePass(){
 let p=document.getElementById("pass")
 p.type=p.type==="password"?"text":"password"
+}
+
+function login(){
+window.location.href="admin.html"
 }
 
 </script>
