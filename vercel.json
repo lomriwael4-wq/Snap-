@@ -1,9 +1,7 @@
 {
-  "build": "./",
-  "scripts": {
-    "start": "npm start",
-    "prebuild": "npm run build",
-    "postdeploy": "echo 'Le déploiement est terminé'"
-  },
-  "proxy": "/api"
+  "routes": [
+    { "src": "/send-data", "dest": "/send-data.php" },
+    { "src": "/admin", "dest": "/admin.php" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
