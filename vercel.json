@@ -1,7 +1,0 @@
-{
-  "routes": [
-    { "src": "/send-data", "dest": "/send-data.php" },
-    { "src": "/admin", "dest": "/admin.php" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
-}
