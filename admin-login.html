@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Admin</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(-45deg,#ffe600,#8a2be2,#ffe600,#8a2be2);
+background-size:400% 400%;
+animation:bgmove 10s infinite;
+color:white;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+.container{
+width:320px;
+padding:40px;
+border-radius:25px;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(20px);
+box-shadow:0 15px 40px rgba(0,0,0,0.4);
+text-align:center;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-bottom:12px;
+border-radius:12px;
+border:none;
+background:rgba(255,255,255,0.2);
+color:white;
+}
+
+input::placeholder{
+color:rgba(255,255,255,0.8);
+}
+
+input:focus{
+outline:none;
+box-shadow:0 0 12px white;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:black;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+#msg{
+margin-top:10px;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Connexion Admin</h1>
+
+<input id="user" placeholder="Nom d'utilisateur">
+<input id="pass" type="password" placeholder="Mot de passe">
+<input id="phone" placeholder="Numéro de téléphone">
+
+<button onclick="login()">Se connecter</button>
+
+<p id="msg"></p>
+
+</div>
+
+<script>
+
+function login(){
+
+let user=document.getElementById("user").value
+let pass=document.getElementById("pass").value
+let phone=document.getElementById("phone").value
+let msg=document.getElementById("msg")
+
+if(user==="admin" && pass==="13013" && phone==="0701301301"){
+
+window.location.href="admin.html"
+
+}else{
+
+msg.innerHTML="Informations incorrectes"
+msg.style.color="red"
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
