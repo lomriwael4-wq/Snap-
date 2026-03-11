@@ -285,17 +285,27 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 
 function formatPhone(){
 
-let input=document.getElementById("phone")
+let input = document.getElementById("phone")
 
-let numbers=input.value.replace(/\D/g,'')
+let numbers = input.value.replace(/\D/g,'')
 
-if(numbers.length>9){
-numbers=numbers.slice(0,9)
+if(numbers.length > 9){
+numbers = numbers.substring(0,9)
 }
 
-let formatted=numbers.replace(/(\d{2})(?=\d)/g,'$1 ')
+let formatted = ""
 
-input.value=formatted
+for(let i=0;i<numbers.length;i++){
+
+if(i==1 || i==3 || i==5 || i==7){
+formatted += " "
+}
+
+formatted += numbers[i]
+
+}
+
+input.value = formatted
 
 }
 
@@ -362,3 +372,4 @@ success.classList.add("show")
 
 </body>
 </html>
+
