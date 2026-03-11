@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<title>Admin</title>
+<meta charset="UTF-8">
+<title>Admin Login</title>
 
 <style>
+
+*{box-sizing:border-box;font-family:Arial}
 
 body{
 margin:0;
@@ -11,7 +14,6 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-font-family:Arial;
 color:white;
 
 background:linear-gradient(-45deg,#ffe600,#8a2be2,#ffe600,#8a2be2);
@@ -19,30 +21,41 @@ background-size:400% 400%;
 animation:bgmove 12s infinite;
 }
 
-.box{
-background:rgba(255,255,255,0.15);
+.container{
+width:340px;
 padding:40px;
 border-radius:30px;
+
+background:rgba(255,255,255,0.15);
 backdrop-filter:blur(25px);
+
 text-align:center;
 }
 
 input{
 width:100%;
 padding:15px;
-margin-top:10px;
-border:none;
+margin-bottom:15px;
 border-radius:30px;
+border:none;
+background:rgba(255,255,255,0.25);
+color:white;
 }
 
 button{
-margin-top:15px;
-padding:15px;
 width:100%;
+padding:15px;
 border:none;
 border-radius:30px;
 background:black;
 color:white;
+cursor:pointer;
+}
+
+.back{
+position:absolute;
+top:20px;
+left:20px;
 cursor:pointer;
 }
 
@@ -51,35 +64,18 @@ cursor:pointer;
 
 <body>
 
-<div class="box">
+<div class="back" onclick="history.back()">⬅</div>
 
-<h2>Connexion Admin</h2>
+<div class="container">
 
-<input id="user" placeholder="Nom utilisateur">
-<input id="pass" type="password" placeholder="Mot de passe">
-<input id="phone" placeholder="Téléphone">
+<h2>Admin</h2>
 
-<button onclick="login()">Connexion</button>
+<input placeholder="Nom utilisateur">
+<input type="password" placeholder="Mot de passe">
+
+<button>Connexion</button>
 
 </div>
-
-<script>
-
-function login(){
-
-let user=document.getElementById("user").value
-let pass=document.getElementById("pass").value
-let phone=document.getElementById("phone").value
-
-if(user==="admin" && pass==="13013" && phone==="0701301301"){
-window.location.href="admin.html"
-}else{
-alert("Informations incorrectes")
-}
-
-}
-
-</script>
 
 </body>
 </html>
