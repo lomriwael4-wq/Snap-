@@ -1,54 +1,37 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Dashboard Admin</title>
+<title>Dashboard</title>
 
 <style>
 
 body{
 margin:0;
 font-family:Arial;
+padding:40px;
+color:white;
+
 background:linear-gradient(-45deg,#ffe600,#8a2be2,#ffe600,#8a2be2);
 background-size:400% 400%;
 animation:bgmove 10s infinite;
-color:white;
-padding:40px;
-}
-
-@keyframes bgmove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
 }
 
 .container{
 background:rgba(255,255,255,0.15);
-backdrop-filter:blur(20px);
 padding:30px;
 border-radius:20px;
-max-width:900px;
-margin:auto;
+backdrop-filter:blur(20px);
 }
 
-h1{
-margin-bottom:20px;
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
 }
 
-.card{
-background:rgba(255,255,255,0.2);
-padding:20px;
-border-radius:15px;
-margin-bottom:20px;
-}
-
-button{
-padding:10px 20px;
-border:none;
-border-radius:10px;
-background:black;
-color:white;
-cursor:pointer;
+th,td{
+padding:12px;
+border-bottom:1px solid rgba(255,255,255,0.3);
 }
 
 </style>
@@ -60,33 +43,41 @@ cursor:pointer;
 
 <h1>Dashboard Admin</h1>
 
-<div class="card">
-📊 Statistiques du site  
-<br><br>
-Visites aujourd'hui : 0  
-<br>
-Utilisateurs inscrits : 0
-</div>
+<table>
 
-<div class="card">
-⚙️ Paramètres du site  
-<br><br>
-Modifier le texte du site  
-<br>
-Changer les couleurs
-</div>
+<thead>
+<tr>
+<th>Nom</th>
+<th>Téléphone</th>
+<th>Date</th>
+</tr>
+</thead>
 
-<button onclick="logout()">Se déconnecter</button>
+<tbody id="userTable"></tbody>
+
+</table>
 
 </div>
 
 <script>
 
-function logout(){
+let users = JSON.parse(localStorage.getItem("users")) || []
 
-window.location.href="index.html"
+let table=document.getElementById("userTable")
 
-}
+users.forEach(user=>{
+
+let row=`
+<tr>
+<td>${user.username}</td>
+<td>${user.phone}</td>
+<td>${user.date}</td>
+</tr>
+`
+
+table.innerHTML+=row
+
+})
 
 </script>
 
