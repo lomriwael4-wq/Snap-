@@ -12,7 +12,7 @@ box-sizing:border-box;
 font-family:Arial;
 }
 
-/* background animé */
+/* fond animé */
 
 body{
 margin:0;
@@ -31,41 +31,6 @@ animation:bgmove 12s infinite;
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
-}
-
-/* hamburger */
-
-.hamburger{
-position:absolute;
-top:20px;
-left:20px;
-font-size:28px;
-cursor:pointer;
-}
-
-/* sidebar */
-
-.sidebar{
-position:fixed;
-top:0;
-left:-260px;
-width:260px;
-height:100%;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(20px);
-padding:30px;
-transition:0.3s;
-}
-
-.sidebar.active{
-left:0;
-}
-
-.sidebar a{
-display:block;
-color:white;
-text-decoration:none;
-margin-bottom:20px;
 }
 
 /* container */
@@ -193,13 +158,6 @@ transform:scale(1);
 
 <body>
 
-<div class="hamburger" onclick="toggleMenu()">☰</div>
-
-<div id="sidebar" class="sidebar">
-<h3>Menu</h3>
-<a href="admin-login.html">🔐 Se connecter (Admin)</a>
-</div>
-
 <div class="container">
 
 <h2>Informations</h2>
@@ -231,10 +189,6 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 </div>
 
 <script>
-
-function toggleMenu(){
-document.getElementById("sidebar").classList.toggle("active")
-}
 
 /* detection opérateur */
 
@@ -287,4 +241,3 @@ success.classList.add("show")
 
 </body>
 </html>
-
