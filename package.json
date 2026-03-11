@@ -2,14 +2,12 @@
   "name": "snapchat-web",
   "version": "1.0.0",
   "scripts": {
-    "start": "npm start",
-    "build": "rollup -c rollup.config.js && copyfiles public/index.html public/style.css public/validation.js"
+    "build": "rollup -c rollup.config.js"
   },
   "dependencies": {
-    "rollup": "^2.7.3",
-    "rollup-plugin-node-resolve": "^5.4.0",
+    "rollup": "^3.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-babel": "^6.0.0",
-    "rollup-plugin-clean-css": "^5.2.8"
+    "@babel/core": "^7.0.0"
   }
 }
-
