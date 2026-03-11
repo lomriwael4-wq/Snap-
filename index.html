@@ -2,14 +2,28 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Connexion</title>
 
 <style>
 
-*{
-box-sizing:border-box;
-font-family:Arial;
+:root{
+--bg1:#ffe600;
+--bg2:#8a2be2;
+--glass:rgba(255,255,255,0.15);
+--input:rgba(255,255,255,0.25);
+--text:#ffffff;
+--shadow:0 10px 40px rgba(0,0,0,0.4);
 }
+
+body.dark{
+--bg1:#0f0f0f;
+--bg2:#2c2c2c;
+--glass:rgba(255,255,255,0.08);
+--input:rgba(255,255,255,0.15);
+}
+
+*{box-sizing:border-box;font-family:Arial}
 
 body{
 margin:0;
@@ -17,18 +31,60 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-color:white;
-overflow:hidden;
+color:var(--text);
 
-background:linear-gradient(-45deg,#ffe600,#8a2be2,#ffe600,#8a2be2);
+background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg1),var(--bg2));
 background-size:400% 400%;
-animation:bgmove 12s ease infinite;
+animation:bgmove 12s infinite;
 }
 
 @keyframes bgmove{
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
+}
+
+/* sidebar */
+
+.sidebar{
+position:fixed;
+top:0;
+left:-260px;
+width:260px;
+height:100%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(20px);
+padding:30px;
+transition:0.3s;
+}
+
+.sidebar.active{left:0}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+margin-bottom:20px;
+}
+
+/* hamburger */
+
+.hamburger{
+position:absolute;
+top:20px;
+left:20px;
+font-size:28px;
+cursor:pointer;
+}
+
+/* theme button */
+
+.theme{
+position:absolute;
+top:20px;
+right:20px;
+cursor:pointer;
+font-size:22px;
 }
 
 /* container */
@@ -38,24 +94,21 @@ width:340px;
 padding:40px;
 border-radius:30px;
 
-background:rgba(255,255,255,0.15);
+background:var(--glass);
 backdrop-filter:blur(25px);
 
-box-shadow:
-0 10px 40px rgba(0,0,0,0.4),
-inset 0 0 20px rgba(255,255,255,0.2);
-
+box-shadow:var(--shadow);
 text-align:center;
 }
 
-/* logo */
-
 .logo{
-font-size:65px;
+font-size:60px;
 margin-bottom:10px;
 }
 
-/* inputs */
+.input-group{
+position:relative;
+}
 
 input{
 width:100%;
@@ -65,25 +118,25 @@ margin-bottom:14px;
 border-radius:30px;
 border:none;
 
-background:rgba(255,255,255,0.25);
+background:var(--input);
 color:white;
 font-size:15px;
-
-transition:0.3s;
 }
 
-input::placeholder{
-color:rgba(255,255,255,0.8);
-}
+input::placeholder{color:#eee}
 
 input:focus{
 outline:none;
+box-shadow:0 0 10px white;
+}
 
-background:rgba(255,255,255,0.35);
+/* show password */
 
-box-shadow:
-0 0 10px white,
-0 0 20px rgba(255,255,255,0.7);
+.eye{
+position:absolute;
+right:15px;
+top:14px;
+cursor:pointer;
 }
 
 /* button */
@@ -91,74 +144,20 @@ box-shadow:
 button{
 width:100%;
 padding:15px;
-
 border:none;
 border-radius:30px;
 
 background:black;
 color:white;
 font-weight:bold;
-font-size:16px;
 
 cursor:pointer;
-transition:0.25s;
+transition:0.2s;
 }
 
 button:hover{
-
 transform:scale(1.05);
-
-box-shadow:
-0 0 15px black,
-0 0 25px rgba(0,0,0,0.7);
-}
-
-/* hamburger */
-
-.hamburger{
-position:absolute;
-top:20px;
-left:20px;
-
-font-size:28px;
-cursor:pointer;
-}
-
-/* sidebar */
-
-.sidebar{
-
-position:fixed;
-top:0;
-left:-260px;
-
-width:260px;
-height:100%;
-
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(20px);
-
-padding:30px;
-transition:0.4s;
-
-box-shadow:5px 0 25px rgba(0,0,0,0.5);
-}
-
-.sidebar h3{
-margin-top:0;
-}
-
-.sidebar a{
-display:block;
-color:white;
-text-decoration:none;
-
-margin-bottom:20px;
-font-size:16px;
-}
-
-.sidebar.active{
-left:0;
+box-shadow:0 0 15px black;
 }
 
 </style>
@@ -169,12 +168,11 @@ left:0;
 <div class="hamburger" onclick="toggleMenu()">☰</div>
 
 <div id="sidebar" class="sidebar">
-
 <h3>Menu</h3>
-
-<a href="admin-login.html">🔐 Se connecter (Admin)</a>
-
+<a href="admin-login.html">Admin</a>
 </div>
+
+<div class="theme" onclick="toggleTheme()">🌙</div>
 
 <div class="container">
 
@@ -183,7 +181,11 @@ left:0;
 <h2>Connexion</h2>
 
 <input placeholder="Email ou pseudo">
-<input type="password" placeholder="Mot de passe">
+
+<div class="input-group">
+<input id="pass" type="password" placeholder="Mot de passe">
+<span class="eye" onclick="togglePass()">👁</span>
+</div>
 
 <button onclick="next()">Se connecter</button>
 
@@ -191,16 +193,21 @@ left:0;
 
 <script>
 
-function next(){
-window.location.href="info.html"
+function toggleMenu(){
+document.getElementById("sidebar").classList.toggle("active")
 }
 
-function toggleMenu(){
+function toggleTheme(){
+document.body.classList.toggle("dark")
+}
 
-let sidebar=document.getElementById("sidebar")
+function togglePass(){
+let p=document.getElementById("pass")
+p.type=p.type==="password"?"text":"password"
+}
 
-sidebar.classList.toggle("active")
-
+function next(){
+window.location.href="info.html"
 }
 
 </script>
