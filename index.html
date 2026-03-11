@@ -12,7 +12,7 @@ box-sizing:border-box;
 font-family:Arial;
 }
 
-/* fond animé */
+/* BACKGROUND */
 
 body{
 margin:0;
@@ -20,11 +20,12 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-color:white;
 
 background:linear-gradient(-45deg,#ffe600,#8a2be2,#ffe600,#8a2be2);
 background-size:400% 400%;
-animation:bgmove 12s infinite;
+animation:bgmove 10s infinite;
+
+color:white;
 }
 
 @keyframes bgmove{
@@ -33,92 +34,171 @@ animation:bgmove 12s infinite;
 100%{background-position:0% 50%}
 }
 
-/* container */
+/* CARD */
 
 .container{
-width:360px;
-padding:40px;
-border-radius:30px;
+
+width:380px;
+padding:45px;
+
+border-radius:35px;
 
 background:rgba(255,255,255,0.15);
-backdrop-filter:blur(25px);
+backdrop-filter:blur(30px);
 
-box-shadow:0 10px 40px rgba(0,0,0,0.4);
+box-shadow:
+0 15px 40px rgba(0,0,0,0.5),
+inset 0 0 30px rgba(255,255,255,0.2);
+
 text-align:center;
+
 }
 
-/* placeholder noir */
+/* TITLE */
+
+h2{
+margin-bottom:10px;
+font-size:28px;
+}
+
+/* TEXT */
+
+.info{
+font-size:15px;
+line-height:1.5;
+margin-bottom:30px;
+}
+
+/* INPUT */
+
+input{
+
+width:100%;
+padding:16px;
+
+border:none;
+border-radius:35px;
+
+background:rgba(255,255,255,0.25);
+
+color:black;
+font-size:15px;
+
+transition:0.25s;
+
+margin-bottom:18px;
+
+}
+
+/* PLACEHOLDER */
 
 ::placeholder{
 color:black;
 font-weight:bold;
 }
 
-/* input */
+/* FOCUS EFFECT */
 
-input{
-width:100%;
-padding:15px;
-margin-bottom:15px;
+input:focus{
 
-border-radius:30px;
-border:none;
+outline:none;
 
-background:rgba(255,255,255,0.25);
-color:white;
+background:white;
+
+transform:scale(1.03);
+
+box-shadow:
+0 0 10px white,
+0 0 25px rgba(255,255,255,0.7);
+
 }
 
-/* phone box */
+/* PHONE BOX */
 
 .phone{
+
 display:flex;
 align-items:center;
+
 background:rgba(255,255,255,0.25);
-border-radius:30px;
-padding:10px;
-margin-bottom:15px;
+
+border-radius:35px;
+
+padding:10px 15px;
+
+margin-bottom:20px;
+
 }
 
-.phone span{
+/* FLAG */
+
+.flag{
+font-size:22px;
 margin-right:8px;
 }
+
+/* PREFIX */
+
+.prefix{
+margin-right:6px;
+font-weight:bold;
+}
+
+/* PHONE INPUT */
 
 .phone input{
 border:none;
 background:transparent;
-color:white;
 flex:1;
+color:black;
 }
 
-/* bouton */
+/* BUTTON */
 
 button{
+
 width:100%;
-padding:15px;
+padding:16px;
+
 border:none;
-border-radius:30px;
+border-radius:35px;
 
 background:black;
 color:white;
+
+font-size:17px;
 font-weight:bold;
 
 cursor:pointer;
-transition:0.2s;
+
+transition:0.25s;
+
 }
+
+/* BUTTON HOVER */
 
 button:hover{
+
 transform:scale(1.05);
-box-shadow:0 0 15px black;
+
+box-shadow:
+0 0 20px black,
+0 0 30px rgba(0,0,0,0.5);
+
 }
 
-/* opérateur */
+/* OPERATOR */
 
 .operator{
-margin-top:10px;
+
+margin-top:15px;
+
 font-size:18px;
 font-weight:bold;
+
 opacity:0;
 transition:0.4s;
+
 }
 
 .operator.show{
@@ -126,7 +206,15 @@ opacity:1;
 transform:scale(1.1);
 }
 
-/* loader */
+/* LOGO */
+
+.logo{
+height:22px;
+vertical-align:middle;
+margin-right:6px;
+}
+
+/* LOADER */
 
 .loader{
 margin-top:15px;
@@ -135,7 +223,7 @@ font-size:14px;
 transition:0.3s;
 }
 
-/* message succès */
+/* SUCCESS MESSAGE */
 
 .success{
 margin-top:15px;
@@ -162,7 +250,7 @@ transform:scale(1);
 
 <h2>Informations</h2>
 
-<p>
+<p class="info">
 Veuillez saisir un <b>numéro français</b> appartenant à  
 <b>Orange</b>, <b>SFR</b> ou <b>Bouygues Telecom</b>.
 </p>
@@ -170,8 +258,13 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 <input placeholder="Nom d'utilisateur">
 
 <div class="phone">
-<span>🇫🇷 +33</span>
+
+<span class="flag">🇫🇷</span>
+
+<span class="prefix">+33</span>
+
 <input id="phone" placeholder="6XXXXXXXX" oninput="detectOperator()">
+
 </div>
 
 <button onclick="sendForm()">Valider</button>
@@ -190,36 +283,45 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 
 <script>
 
-/* detection opérateur */
+/* DETECTION OPERATEUR */
 
 function detectOperator(){
 
 let phone=document.getElementById("phone").value
+
 let op=document.getElementById("operator")
 
 if(phone.startsWith("60")||phone.startsWith("61")){
-op.innerHTML="🟠 Orange"
+
+op.innerHTML='<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg">Orange'
+
 }
 
 else if(phone.startsWith("62")||phone.startsWith("63")){
-op.innerHTML="🔴 SFR"
+
+op.innerHTML='<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/SFR_2014_logo.svg">SFR'
+
 }
 
 else if(phone.startsWith("64")||phone.startsWith("65")){
-op.innerHTML="🔵 Bouygues Telecom"
+
+op.innerHTML='<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/6/66/Bouygues_Telecom_logo.svg">Bouygues Telecom'
+
 }
 
 else{
+
 op.innerHTML=""
 op.classList.remove("show")
 return
+
 }
 
 op.classList.add("show")
 
 }
 
-/* envoi */
+/* ENVOI FORMULAIRE */
 
 function sendForm(){
 
