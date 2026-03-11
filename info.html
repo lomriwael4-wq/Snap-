@@ -6,7 +6,10 @@
 
 <style>
 
-*{box-sizing:border-box;font-family:Arial;}
+*{
+box-sizing:border-box;
+font-family:Arial;
+}
 
 body{
 margin:0;
@@ -14,6 +17,7 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+
 background:linear-gradient(-45deg,#ffe600,#8a2be2,#ffe600,#8a2be2);
 background-size:400% 400%;
 animation:bgmove 10s infinite;
@@ -32,6 +36,7 @@ padding:40px;
 border-radius:25px;
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(20px);
+box-shadow:0 15px 40px rgba(0,0,0,0.4);
 text-align:center;
 }
 
@@ -42,6 +47,10 @@ background:rgba(255,255,255,0.2);
 border-radius:12px;
 padding:10px;
 margin-bottom:12px;
+}
+
+.phone-box span{
+margin-right:8px;
 }
 
 .phone-box input{
