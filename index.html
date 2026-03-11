@@ -47,8 +47,8 @@ background:rgba(255,255,255,0.15);
 backdrop-filter:blur(30px);
 
 box-shadow:
-0 15px 40px rgba(0,0,0,0.5),
-inset 0 0 30px rgba(255,255,255,0.2);
+0 20px 60px rgba(0,0,0,0.5),
+inset 0 0 25px rgba(255,255,255,0.2);
 
 text-align:center;
 
@@ -65,7 +65,7 @@ font-size:28px;
 
 .info{
 font-size:15px;
-line-height:1.5;
+line-height:1.6;
 margin-bottom:30px;
 }
 
@@ -97,7 +97,7 @@ color:black;
 font-weight:bold;
 }
 
-/* FOCUS EFFECT */
+/* NEON FOCUS */
 
 input:focus{
 
@@ -109,7 +109,8 @@ transform:scale(1.03);
 
 box-shadow:
 0 0 10px white,
-0 0 25px rgba(255,255,255,0.7);
+0 0 20px white,
+0 0 40px rgba(255,255,255,0.9);
 
 }
 
@@ -128,6 +129,23 @@ padding:10px 15px;
 
 margin-bottom:20px;
 
+transition:0.3s;
+
+}
+
+/* PHONE NEON */
+
+.phone:focus-within{
+
+background:white;
+
+box-shadow:
+0 0 10px white,
+0 0 20px white,
+0 0 40px rgba(255,255,255,0.9);
+
+transform:scale(1.03);
+
 }
 
 /* FLAG */
@@ -142,6 +160,7 @@ margin-right:8px;
 .prefix{
 margin-right:6px;
 font-weight:bold;
+color:black;
 }
 
 /* PHONE INPUT */
@@ -206,6 +225,27 @@ opacity:1;
 transform:scale(1.1);
 }
 
+/* VALID CHECK */
+
+.valid{
+
+margin-top:10px;
+
+font-size:22px;
+
+color:#00ff88;
+
+opacity:0;
+
+transition:0.4s;
+
+}
+
+.valid.show{
+opacity:1;
+transform:scale(1.2);
+}
+
 /* LOGO */
 
 .logo{
@@ -223,7 +263,7 @@ font-size:14px;
 transition:0.3s;
 }
 
-/* SUCCESS MESSAGE */
+/* SUCCESS */
 
 .success{
 margin-top:15px;
@@ -271,25 +311,25 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 
 <div id="operator" class="operator"></div>
 
+<div id="valid" class="valid">✔ Numéro valide</div>
+
 <div id="loader" class="loader">
 ⏳ Envoi en cours...
 </div>
 
 <div id="success" class="success">
-✔ Merci, vos informations ont bien été envoyées, Merci d'attendre la Confirmation par Message sur Tiktok.
+✔ Merci, vos informations ont bien été envoyées.
 </div>
 
 </div>
 
 <script>
 
-/* DETECTION OPERATEUR */
-
 function detectOperator(){
 
 let phone=document.getElementById("phone").value
-
 let op=document.getElementById("operator")
+let valid=document.getElementById("valid")
 
 if(phone.startsWith("60")||phone.startsWith("61")){
 
@@ -313,15 +353,17 @@ else{
 
 op.innerHTML=""
 op.classList.remove("show")
+valid.classList.remove("show")
 return
 
 }
 
 op.classList.add("show")
+valid.classList.add("show")
 
 }
 
-/* ENVOI FORMULAIRE */
+/* ENVOI */
 
 function sendForm(){
 
