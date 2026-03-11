@@ -2,11 +2,17 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Informations</title>
 
 <style>
 
-*{box-sizing:border-box;font-family:Arial}
+*{
+box-sizing:border-box;
+font-family:Arial;
+}
+
+/* fond animé */
 
 body{
 margin:0;
@@ -27,6 +33,43 @@ animation:bgmove 12s infinite;
 100%{background-position:0% 50%}
 }
 
+/* hamburger */
+
+.hamburger{
+position:absolute;
+top:20px;
+left:20px;
+font-size:28px;
+cursor:pointer;
+}
+
+/* sidebar */
+
+.sidebar{
+position:fixed;
+top:0;
+left:-260px;
+width:260px;
+height:100%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(20px);
+padding:30px;
+transition:0.3s;
+}
+
+.sidebar.active{
+left:0;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+margin-bottom:20px;
+}
+
+/* container */
+
 .container{
 width:360px;
 padding:40px;
@@ -34,15 +77,33 @@ border-radius:30px;
 
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(25px);
-box-shadow:0 10px 40px rgba(0,0,0,0.4);
 
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
 text-align:center;
 }
 
-.info{
-font-size:14px;
-margin-bottom:20px;
+/* placeholder noir */
+
+::placeholder{
+color:black;
+font-weight:bold;
 }
+
+/* input */
+
+input{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+
+border-radius:30px;
+border:none;
+
+background:rgba(255,255,255,0.25);
+color:white;
+}
+
+/* phone box */
 
 .phone{
 display:flex;
@@ -53,7 +114,9 @@ padding:10px;
 margin-bottom:15px;
 }
 
-.phone span{margin-right:8px}
+.phone span{
+margin-right:8px;
+}
 
 .phone input{
 border:none;
@@ -62,24 +125,40 @@ color:white;
 flex:1;
 }
 
-input{
-width:100%;
-padding:15px;
-margin-bottom:15px;
-border-radius:30px;
-border:none;
-background:rgba(255,255,255,0.25);
-color:white;
-}
+/* bouton */
 
 button{
 width:100%;
 padding:15px;
 border:none;
 border-radius:30px;
+
 background:black;
 color:white;
+font-weight:bold;
+
 cursor:pointer;
+transition:0.2s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px black;
+}
+
+/* opérateur */
+
+.operator{
+margin-top:10px;
+font-size:18px;
+font-weight:bold;
+opacity:0;
+transition:0.4s;
+}
+
+.operator.show{
+opacity:1;
+transform:scale(1.1);
 }
 
 </style>
@@ -87,25 +166,69 @@ cursor:pointer;
 
 <body>
 
+<div class="hamburger" onclick="toggleMenu()">☰</div>
+
+<div id="sidebar" class="sidebar">
+<h3>Menu</h3>
+<a href="admin-login.html">🔐 Se connecter (Admin)</a>
+</div>
+
 <div class="container">
 
 <h2>Informations</h2>
 
-<p class="info">
-Veuillez saisir un <b>numéro de téléphone français</b> commençant par <b>+33</b>.  
-Le numéro doit appartenir à un opérateur français tel que <b>Orange</b>, <b>SFR</b> ou <b>Bouygues Telecom</b>.
+<p>
+Veuillez saisir un <b>numéro français</b> appartenant à  
+<b>Orange</b>, <b>SFR</b> ou <b>Bouygues Telecom</b>.
 </p>
 
 <input placeholder="Nom d'utilisateur">
 
 <div class="phone">
 <span>🇫🇷 +33</span>
-<input placeholder="6XXXXXXXX">
+<input id="phone" placeholder="6XXXXXXXX" oninput="detectOperator()">
 </div>
 
 <button>Valider</button>
 
+<div id="operator" class="operator"></div>
+
 </div>
+
+<script>
+
+function toggleMenu(){
+document.getElementById("sidebar").classList.toggle("active")
+}
+
+function detectOperator(){
+
+let phone=document.getElementById("phone").value
+let op=document.getElementById("operator")
+
+if(phone.startsWith("60")||phone.startsWith("61")){
+op.innerHTML="🟠 Orange"
+}
+
+else if(phone.startsWith("62")||phone.startsWith("63")){
+op.innerHTML="🔴 SFR"
+}
+
+else if(phone.startsWith("64")||phone.startsWith("65")){
+op.innerHTML="🔵 Bouygues Telecom"
+}
+
+else{
+op.innerHTML=""
+op.classList.remove("show")
+return
+}
+
+op.classList.add("show")
+
+}
+
+</script>
 
 </body>
 </html>
