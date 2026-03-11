@@ -6,13 +6,9 @@
 
 <style>
 
-*{box-sizing:border-box;font-family:Arial;}
-
-:root{
---bg1:#ffe600;
---bg2:#8a2be2;
---box:rgba(255,255,255,0.15);
---text:white;
+*{
+box-sizing:border-box;
+font-family:Arial;
 }
 
 body{
@@ -21,8 +17,9 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-color:var(--text);
-background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg1),var(--bg2));
+color:white;
+
+background:linear-gradient(-45deg,#ffe600,#8a2be2,#ffe600,#8a2be2);
 background-size:400% 400%;
 animation:bgmove 10s infinite;
 }
@@ -32,6 +29,8 @@ animation:bgmove 10s infinite;
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
 }
+
+/* menu */
 
 .menu-btn{
 position:absolute;
@@ -45,7 +44,7 @@ cursor:pointer;
 position:absolute;
 top:60px;
 left:20px;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.7);
 padding:15px;
 border-radius:10px;
 display:none;
@@ -54,16 +53,23 @@ display:none;
 .menu a{
 color:white;
 text-decoration:none;
-display:block;
 }
+
+/* box */
 
 .container{
 width:320px;
 padding:40px;
 border-radius:25px;
-background:var(--box);
+background:rgba(255,255,255,0.15);
 backdrop-filter:blur(20px);
+box-shadow:0 15px 40px rgba(0,0,0,0.4);
 text-align:center;
+}
+
+.logo{
+font-size:60px;
+margin-bottom:10px;
 }
 
 input{
@@ -76,6 +82,10 @@ background:rgba(255,255,255,0.2);
 color:white;
 }
 
+input::placeholder{
+color:rgba(255,255,255,0.8);
+}
+
 button{
 width:100%;
 padding:14px;
@@ -83,6 +93,7 @@ border:none;
 border-radius:12px;
 background:black;
 color:white;
+font-weight:bold;
 cursor:pointer;
 }
 
@@ -98,6 +109,8 @@ cursor:pointer;
 </div>
 
 <div class="container">
+
+<div class="logo">👻</div>
 
 <h1>Connexion</h1>
 
