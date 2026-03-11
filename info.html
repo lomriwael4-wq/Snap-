@@ -2,14 +2,12 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Informations</title>
 
 <style>
 
-*{
-box-sizing:border-box;
-font-family:Arial;
-}
+*{box-sizing:border-box;font-family:Arial}
 
 body{
 margin:0;
@@ -21,7 +19,7 @@ color:white;
 
 background:linear-gradient(-45deg,#ffe600,#8a2be2,#ffe600,#8a2be2);
 background-size:400% 400%;
-animation:bgmove 12s ease infinite;
+animation:bgmove 12s infinite;
 }
 
 @keyframes bgmove{
@@ -37,12 +35,12 @@ border-radius:30px;
 
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(25px);
-
 box-shadow:0 10px 40px rgba(0,0,0,0.4);
+
 text-align:center;
 }
 
-.phone-box{
+.phone{
 display:flex;
 align-items:center;
 background:rgba(255,255,255,0.25);
@@ -51,11 +49,9 @@ padding:10px;
 margin-bottom:15px;
 }
 
-.phone-box span{
-margin-right:8px;
-}
+.phone span{margin-right:8px}
 
-.phone-box input{
+.phone input{
 border:none;
 background:transparent;
 color:white;
@@ -91,49 +87,16 @@ cursor:pointer;
 
 <h2>Informations</h2>
 
-<input id="username" placeholder="Nom d'utilisateur">
+<input placeholder="Nom d'utilisateur">
 
-<div class="phone-box">
+<div class="phone">
 <span>🇫🇷 +33</span>
-<input id="phone" placeholder="6XXXXXXXX">
+<input placeholder="6XXXXXXXX">
 </div>
 
-<button onclick="verifier()">Valider</button>
-
-<p id="message"></p>
+<button>Valider</button>
 
 </div>
-
-<script>
-
-function verifier(){
-
-let username=document.getElementById("username").value
-let phone=document.getElementById("phone").value
-let msg=document.getElementById("message")
-
-if(phone.length!=9){
-msg.innerHTML="Numéro invalide"
-msg.style.color="red"
-return
-}
-
-let users = JSON.parse(localStorage.getItem("users")) || []
-
-users.push({
-username: username,
-phone: "+33"+phone,
-date: new Date().toLocaleString()
-})
-
-localStorage.setItem("users", JSON.stringify(users))
-
-msg.innerHTML="Informations envoyées ✅"
-msg.style.color="lime"
-
-}
-
-</script>
 
 </body>
 </html>
