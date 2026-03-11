@@ -12,7 +12,7 @@ box-sizing:border-box;
 font-family:Arial;
 }
 
-/* fond animé */
+/* background animé */
 
 body{
 margin:0;
@@ -161,6 +161,33 @@ opacity:1;
 transform:scale(1.1);
 }
 
+/* loader */
+
+.loader{
+margin-top:15px;
+opacity:0;
+font-size:14px;
+transition:0.3s;
+}
+
+/* message succès */
+
+.success{
+margin-top:15px;
+font-size:16px;
+font-weight:bold;
+color:#00ff88;
+
+opacity:0;
+transform:scale(0.8);
+transition:0.4s;
+}
+
+.success.show{
+opacity:1;
+transform:scale(1);
+}
+
 </style>
 </head>
 
@@ -189,9 +216,17 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 <input id="phone" placeholder="6XXXXXXXX" oninput="detectOperator()">
 </div>
 
-<button>Valider</button>
+<button onclick="sendForm()">Valider</button>
 
 <div id="operator" class="operator"></div>
+
+<div id="loader" class="loader">
+⏳ Envoi en cours...
+</div>
+
+<div id="success" class="success">
+✔ Merci, vos informations ont bien été envoyées.
+</div>
 
 </div>
 
@@ -200,6 +235,8 @@ Veuillez saisir un <b>numéro français</b> appartenant à
 function toggleMenu(){
 document.getElementById("sidebar").classList.toggle("active")
 }
+
+/* detection opérateur */
 
 function detectOperator(){
 
@@ -225,6 +262,24 @@ return
 }
 
 op.classList.add("show")
+
+}
+
+/* envoi */
+
+function sendForm(){
+
+let loader=document.getElementById("loader")
+let success=document.getElementById("success")
+
+loader.style.opacity="1"
+
+setTimeout(()=>{
+
+loader.style.opacity="0"
+success.classList.add("show")
+
+},1500)
 
 }
 
